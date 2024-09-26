@@ -1,0 +1,120 @@
+/* Sidebar base styles */
+.sidebar {
+  transition: width 0.3s ease;
+  background-color: #2d3748; /* Sidebar background color */
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar width when open and collapsed */
+.sidebar-open {
+  width: 250px;
+}
+
+.sidebar-collapsed {
+  width: 4rem;
+}
+
+/* Sidebar header styles */
+.sidebar-header {
+  border-bottom: 1px solid #4a5568; /* Bottom border color */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  padding: 0.7rem;
+}
+
+/* Logo styles */
+.logo {
+  width: 100%;
+  max-width: 3rem; /* Adjusted for alignment */
+  height: auto;
+}
+
+/* Menu item styles */
+.menu-item {
+  position: relative;
+}
+
+/* Link styles for menu items */
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  color: #fff; /* Text color */
+  text-decoration: none;
+  transition: background 0.3s ease, padding 0.3s ease;
+  border-radius: 4px;
+}
+
+.menu-link:hover {
+  background: #1e2a38; /* Background color on hover */
+  padding-left: 24px; /* Slight padding expansion on hover */
+}
+
+/* Icon styles */
+.menu-icon {
+  font-size: 1.5rem; /* Increased icon size */
+  min-width: 2.5rem; /* Adjusted for better alignment */
+  margin-right: 1rem; /* Spacing between icon and text */
+}
+
+/* Dropdown menu styles */
+.submenu-content {
+  max-height: 0;
+  padding: 0 20px;
+  background: #1e2a38; /* Background color of dropdown */
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  border-left: 2px solid #4a5568; /* Border left for dropdown */
+  border-radius: 0 4px 4px 0; /* Rounded corners for dropdown */
+}
+
+.menu-item:hover .submenu-content {
+  max-height: 500px; /* Adjust according to content height */
+  padding: 10px 20px; /* Padding for dropdown content */
+}
+
+/* Dropdown item styles */
+.submenu-item {
+  margin: 5px 0;
+}
+
+.submenu-link {
+  display: block;
+  padding: 10px 20px;
+  color: #cbd5e0; /* Text color */
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.submenu-link:hover {
+  background: #1b2838; /* Background color on hover */
+}
+
+/* Toggle button styles */
+.toggle-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-button.text-xl {
+  color: #fff;
+}
+
+/* Sidebar menu container */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+  padding-top: 1rem;
+}
+.submenu-link.active {
+  background: #ffffff; /* Background color for active state */
+  color: #1e2a38; /* Text color for active state */
+}
