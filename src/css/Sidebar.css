@@ -2,7 +2,7 @@
 .sidebar {
   transition: width 0.3s ease;
   background-color: #2d3748; /* Sidebar background color */
-  height: 100vh;
+  height: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
@@ -10,11 +10,11 @@
 
 /* Sidebar width when open and collapsed */
 .sidebar-open {
-  width: 250px;
+  width: 250px; /* ขนาด Sidebar เมื่อเปิด */
 }
 
 .sidebar-collapsed {
-  width: 4rem;
+  width: 3.5rem; /* ขนาด Sidebar เมื่อย่อ */
 }
 
 /* Sidebar header styles */
@@ -42,7 +42,7 @@
 .menu-link {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: 12px 17px;
   color: #fff; /* Text color */
   text-decoration: none;
   transition: background 0.3s ease, padding 0.3s ease;
@@ -56,8 +56,8 @@
 
 /* Icon styles */
 .menu-icon {
-  font-size: 1.5rem; /* Increased icon size */
-  min-width: 2.5rem; /* Adjusted for better alignment */
+  font-size: 1rem; /* ปรับขนาดไอคอนให้เล็กลง */
+  min-width: 2rem; /* Adjusted for better alignment */
   margin-right: 1rem; /* Spacing between icon and text */
 }
 
@@ -77,18 +77,44 @@
   padding: 10px 20px; /* Padding for dropdown content */
 }
 
+.menu-icon {
+  font-size: 1.2rem; /* Increase icon size for better visibility */
+  min-width: 2rem; /* Adjusted for better alignment */
+  margin-right: 1rem; /* Spacing between icon and text */
+}
+
+/* Dropdown menu styles */
+.submenu-content {
+  max-height: 0;
+  padding: 0 20px;
+  background: #1e2a38; /* Background color of dropdown */
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  border-left: 3px solid #4a5568; /* Thicker border left for dropdown */
+  border-radius: 0 6px 6px 0; /* More rounded corners for dropdown */
+}
+
+.menu-item:hover .submenu-content {
+  max-height: 500px; /* Adjust according to content height */
+  padding: 10px 20px; /* Padding for dropdown content */
+}
+
 /* Dropdown item styles */
 .submenu-item {
   margin: 5px 0;
 }
 
 .submenu-link {
-  display: block;
+  display: flex; /* Flexbox for horizontal layout */
+  align-items: center; /* Center items vertically */
   padding: 10px 20px;
   color: #cbd5e0; /* Text color */
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 4px; /* Rounded corners for submenu links */
   transition: background 0.2s ease;
+}
+.dropdown-icon {
+  margin-right: 1rem; /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
 }
 
 .submenu-link:hover {
@@ -100,20 +126,30 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  color: #fff; /* Change button color to white */
 }
 
 .toggle-button.text-xl {
-  color: #fff;
+  color: #fff; /* Ensure icon color is white */
 }
 
-/* Sidebar menu container */
-.sidebar-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  flex-grow: 1;
-  padding-top: 1rem;
+/* Icon styles for submenu */
+.submenu-icon {
+  font-size: 1.2rem; /* Increased size for submenu icons */
+  min-width: 2.5rem; /* ปรับขนาดให้เหมาะสมมากขึ้น */
+  margin-right: 1.5rem; /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
 }
+
+/* Text styles for submenu */
+.submenu-text {
+  flex-grow: 1; /* Allow the text to take up remaining space */
+}
+
+/* Hover and active styles */
+.submenu-link:hover {
+  background: #1b2838; /* Background color on hover */
+}
+
 .submenu-link.active {
   background: #ffffff; /* Background color for active state */
   color: #1e2a38; /* Text color for active state */

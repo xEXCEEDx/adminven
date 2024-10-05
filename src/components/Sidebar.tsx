@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaCalendar, FaUser, FaLock } from 'react-icons/fa';
+import { FaHome, FaShopify, FaLock, FaUtensils, FaList, FaShoppingBasket, FaPlus } from 'react-icons/fa';
 import '../css/Sidebar.css';
 
 const Sidebar: React.FC = () => {
@@ -15,10 +15,10 @@ const Sidebar: React.FC = () => {
 
   const handleMenuClick = (menu: string, hasSubMenu: boolean, event: React.MouseEvent) => {
     if (hasSubMenu) {
-      event.preventDefault(); // Prevent navigation if menu has submenus
+      event.preventDefault();
       setActiveMenu(menu === activeMenu ? null : menu);
       if (menu !== activeMenu) {
-        setActiveSubmenu(null); // Reset active submenu when changing menu
+        setActiveSubmenu(null);
       }
     }
   };
@@ -68,10 +68,9 @@ const Sidebar: React.FC = () => {
 
       <nav className="sidebar-menu">
         <ul>
-          {[
-            { name: 'Dashboards', icon: <FaHome />, path: '/dashboards', subMenu: [] },
-            { name: 'Product', icon: <FaCalendar />, path: '/products', subMenu: [ 'ProductList', 'AddProduct'] },
-            { name: 'Order', icon: <FaUser />, path: '/orders', subMenu: ['OrderList', 'Subitem 2'] },
+          {[{ name: 'Dashboards', icon: <FaHome />, path: '/dashboards', subMenu: [] },
+            { name: 'Shop', icon: <FaShopify />, path: '/shop', subMenu: ['ProductList', 'AddProduct', 'OrderShop'] },
+            { name: 'Food ', icon: <FaUtensils />, path: '/foodmenu', subMenu: ['FoodList', 'AddFoodMenu', 'OrderFood'] },
             { name: 'Edit Page', icon: <FaLock />, path: '/edit-page', subMenu: [] }
           ].map((item) => (
             <li 
@@ -84,7 +83,9 @@ const Sidebar: React.FC = () => {
                 onClick={(event) => handleMenuClick(item.name, item.subMenu.length > 0, event)}
               >
                 <span className="menu-icon">{item.icon}</span>
-                <span className={`menu-text ${isSidebarOpen ? 'block' : 'hidden'}`}>{item.name.replace('-', ' ').toUpperCase()}</span>
+                <span className={`menu-text ${isSidebarOpen ? 'block' : 'hidden'}`}>
+                  {item.name}
+                </span>
                 {item.subMenu.length > 0 && isSidebarOpen && (
                   <span className="ml-auto">
                     <i className={`bi ${activeMenu === item.name ? 'bi-caret-down' : 'bi-caret-right'}`}></i>
@@ -95,14 +96,22 @@ const Sidebar: React.FC = () => {
                 <div className={`submenu-content ${activeMenu === item.name ? 'active' : ''}`}>
                   <ul>
                     {item.subMenu.map((subItem, index) => (
-                      <li key={index} className={`submenu-item ${activeSubmenu === subItem ? 'active' : ''}`}>
+                      <li 
+                        key={index} 
+                        className={`submenu-item ${activeSubmenu === subItem ? 'active' : ''}`}
+                      >
                         <Link 
                           to={`${item.path}/${subItem.toLowerCase().replace(' ', '-')}`} 
                           className={`submenu-link ${activeSubmenu === subItem ? 'active' : ''}`}
                           onClick={() => handleSubmenuClick(subItem)}
                         >
                           <div className="dropdown-icon">
-                            {/* Add an icon or text here */}
+                            {subItem === 'ProductList' && <FaList />} 
+                            {subItem === 'AddProduct' && <FaPlus />}
+                            {subItem === 'OrderShop' && <FaShoppingBasket />}
+                            {subItem === 'FoodList' && <FaList />} 
+                            {subItem === 'AddFoodMenu' && <FaPlus />}
+                            {subItem === 'OrderFood' && <FaShoppingBasket />}
                           </div>
                           {subItem}
                         </Link>

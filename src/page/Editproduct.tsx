@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import 'quill/dist/quill.snow.css';
 import '../css/AddProduct.css';
 import Layout from './layout/layoutside';
-import axios from 'axios';
+import axios from "axios";
 import { requestMethod } from './requestMethod';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EditProductPage: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>(); // ใช้ useParams เพื่อดึง product id
 
   const [formData, setFormData] = useState({
     store_id: 1,
@@ -24,32 +24,21 @@ const EditProductPage: React.FC = () => {
   const [newColor, setNewColor] = useState('');
   const [colors, setColors] = useState<string[]>([]);
 
-  // ดึงข้อมูลสินค้าจาก API
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`${requestMethod}/product/find/${id}`);
-        if (response.status === 200) {
-          const product = response.data;
-          setFormData({
-            store_id: product.store_id,
-            name: product.name,
-            detail: product.detail,
-            price: product.price,
-            stock: product.stock,
-            category: product.category
-          });
-          setImages(product.product_img);
-          setColors(product.product_more || []); // ถ้ามีสีเพิ่มเติม
-        }
+        const response = await axios.get(`${requestMethod}/product/${id}`);
+        setFormData(response.data);
+        setImages(response.data.product_img);
+        setColors(response.data.product_more);
       } catch (error) {
         console.error('Error fetching product:', error);
-        toast.error('Error fetching product');
+        toast.error('Failed to fetch product data');
       }
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id]); // เรียกใช้ useEffect เมื่อ id เปลี่ยนแปลง
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, files } = e.target;
@@ -109,6 +98,7 @@ const EditProductPage: React.FC = () => {
       }
     } catch (error) {
       console.error('Error updating product:', error);
+      toast.error('Failed to update product');
     }
   };
 
